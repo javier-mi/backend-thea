@@ -3,17 +3,7 @@ package edu.caece.app.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -43,13 +33,10 @@ public class User {
 
 	public User(String name, String... roles) {
 		this.name = name;
-
 		this.roles = new ArrayList<Role>();
-
 		for (int i = 0; i < roles.length; i++) {
 			this.roles.add(new Role(roles[i]));
 		}
-
 		this.roles.forEach(x -> x.getUsers().add(this));
 	}
 
@@ -95,19 +82,13 @@ public class User {
 	}
 
 	public String getRolesSeparetedComma() {
-
 		String result = "";
 		int i = 0;
-
 		for (Role role : roles) {
-
 			result = role.getName();
-			
 			if (i < roles.size())
 				result = ", ";
-
 		}
-
 		return result;
 	}
 }

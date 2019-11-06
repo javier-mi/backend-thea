@@ -19,9 +19,7 @@ public class AuthenticationManagerService implements AuthenticationManager  {
 		
 		if("Admin".equals(user) && "passwd".equals(pass)) {
 			return authentication;
-		}
-		else
-		{
+		} else {
 			throw new BadCredentialsException("INVALID CREDENTIALS");
 		}
 	}
